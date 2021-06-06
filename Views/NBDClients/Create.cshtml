@@ -1,0 +1,119 @@
+﻿@model NBDPrototype.Models.Client
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@*<h1>Create</h1>
+
+    <h4>Client</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ClientName" class="control-label"></label>
+                    <input asp-for="ClientName" class="form-control" />
+                    <span asp-validation-for="ClientName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClientAddress" class="control-label"></label>
+                    <input asp-for="ClientAddress" class="form-control" />
+                    <span asp-validation-for="ClientAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactName" class="control-label"></label>
+                    <input asp-for="ContactName" class="form-control" />
+                    <span asp-validation-for="ContactName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactPhone" class="control-label"></label>
+                    <input asp-for="ContactPhone" class="form-control" />
+                    <span asp-validation-for="ContactPhone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
+
+
+
+<br />
+<h2 class="text-info">Create New Project</h2>
+<br />
+
+<div class="border container" style="padding:30px;">
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClientName"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="ClientName" class="form-control" placeholder="E.g. Wireless Fidelity Ltd." />
+            </div>
+            <span asp-validation-for="ClientName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClientAddress"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="ClientAddress" class="form-control" placeholder="E.g. 69 Dakoa, Itlog, DA 9000 " />
+            </div>
+            <span asp-validation-for="ClientAddress" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ContactName"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="ContactName" class="form-control" placeholder="E.g. Lana Rhoade" />
+            </div>
+            <span asp-validation-for="ContactName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ContactPhone"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="ContactPhone" class="form-control" placeholder="E.g. 4379836219" />
+            </div>
+            <span asp-validation-for="ContactPhone" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <input type="submit" value="Create" class="btn btn-primary form-control" />
+            </div>
+            @*<div class="col-3 offset-3">
+                <a href="@Url.Action("Create","BidItems", new { id = Model.ID }, null)"><input type="submit" value="Create" class="btn btn-primary" /></a>
+            </div>*@
+            <div class="col-3">
+                <a asp-action="Index" class="btn btn-success form-control">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Back to List
+                </a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

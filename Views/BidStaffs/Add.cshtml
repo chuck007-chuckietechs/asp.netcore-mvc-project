@@ -1,0 +1,44 @@
+﻿@model NBDPrototype.Models.BidStaff
+
+@{
+    ViewData["Title"] = "Add Staff";
+}
+
+
+<h2></h2>
+<hr />
+<form asp-action="Add">
+    <input type="hidden" name="BidId" value="@Model.BidId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="StaffId"></label>
+                </div>
+                <div class="col-6">
+                    <select asp-for="StaffId" class="form-control" asp-items="ViewBag.StaffId">
+                        <option value="">Select an Employee</option>
+                    </select>
+                </div>
+                <span asp-validation-for="StaffId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BidStaffTotalHours" class="control-label"></label>
+                <input asp-for="BidStaffTotalHours" class="form-control" type="number" min="0" />
+                <span asp-validation-for="BidStaffTotalHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BidStaffMarkup" class="control-label"></label>
+                <input asp-for="BidStaffMarkup" class="form-control" type="number" min="0" />
+                <span asp-validation-for="BidStaffMarkup" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <a href='@ViewData["returnURL"]'>Back to Bid</a>
+</div>

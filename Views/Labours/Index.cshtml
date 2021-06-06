@@ -1,0 +1,87 @@
+﻿@model IEnumerable<NBDPrototype.Models.Labour>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container row p-0 m-0">
+    <div class="col-10 px-sm-0 m-0">
+        <h1 class="text-muted">Labour List</h1>
+        <br />
+    </div>
+    <div class="col-2 px-sm-0 m-0">
+        @if (User.IsInRole("Manager"))
+        {
+            <a asp-action="Create" class="btn btn-primary form-control text-white " tooltip-test" title="Create a new Labour">
+                <i class="fas fa-plus"></i>
+                Create New Labour
+            </a>
+        }
+        </div>
+    <form asp-action="Index" method="get" class="container">
+        <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+        <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+        <div class="form-horizontal" nowrap>
+
+            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" id="filterToggle" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                Filter/Search
+            </button>
+            <div class="collapse @(ViewData["Filtering"])" id="collapseFilter">
+                <div class="card card-body bg-light">
+                    <div class="container row p-0 m-0">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Search Labour:</label>
+                            @Html.TextBox("SearchString", null, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-4 align-self-end">
+                            <input type="submit" name="actionButton" value="Filter" class="btn btn-outline-primary" />
+                            <a asp-action="Index" class="btn btn-outline-dark">Clear</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <table class="table">
+            <thead>
+                <tr align="left" nowrap>
+                    <td align="left" nowrap width="33%">
+                        <input align="left" type="submit" name="actionButton" value="Description" class="btn btn-link" />
+                    </td>
+
+                    <td align="right" nowrap width="33%">
+
+                        <a class="btn btn-link">Price</a>
+                        @*<input align="left" type="submit" name="actionButton" value="Price" class="btn btn-link" />*@
+                    </td>
+                    <td width="33%">
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td align="left" nowrap width="33%">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td align="right" nowrap width="33%">
+                            @Html.DisplayFor(modelItem => item.PriceHour)
+                        </td>
+
+                        <td align="right" nowrap width="33%">
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-success btn-sm text-white" tooltip-test" title="Edit a Labour">Edit</a>
+                                <button asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm" tooltip-test" title="Delete a Labour">Delete</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <partial name="_PagingNavBar" />
+    </form>
+</div>
+

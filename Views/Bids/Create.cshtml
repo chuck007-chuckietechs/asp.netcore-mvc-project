@@ -1,0 +1,147 @@
+﻿@model NBDPrototype.Models.Bid
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@*<h1>Create</h1>
+
+    <h4>Bid</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ProjectID" class="control-label"></label>
+                    <select asp-for="ProjectID" class ="form-control" asp-items="ViewBag.ProjectID"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClosingDate" class="control-label"></label>
+                    <input asp-for="ClosingDate" class="form-control" />
+                    <span asp-validation-for="ClosingDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Amount" class="control-label"></label>
+                    <input asp-for="Amount" class="form-control" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StatusId" class="control-label"></label>
+                    <select asp-for="StatusId" class ="form-control" asp-items="ViewBag.StatusId"></select>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+<br />
+<h2 class="text-info">Create New Bid</h2>
+<br />
+
+<div class="border container" style="padding:30px;">
+    <form asp-action="Create">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ProjectID"></label>
+            </div>
+            <div class="col-6">
+                <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID">
+                    <option value="">Select a Project</option>
+                </select>
+            </div>
+            <span asp-validation-for="ProjectID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Date"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Date" class="form-control" value="@(DateTime.Now.ToShortDateString())" />
+            </div>
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="StartDate"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="StartDate" class="form-control" />
+            </div>
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClosingDate"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="ClosingDate" class="form-control" />
+            </div>
+            <span asp-validation-for="ClosingDate" class="text-danger"></span>
+        </div>
+
+        @*<div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Amount"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Amount" class="form-control" />
+            </div>
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>*@
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="StatusId"></label>
+            </div>
+            <div class="col-6">
+                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId">
+                    <option value="">Check Status</option>
+                </select>
+            </div>
+            <span asp-validation-for="StatusId" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <input type="submit" value="Create" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-3">
+                <a asp-action="Index" class="btn btn-success form-control">
+                    <i class="fas fa-sign-out-alt">
+                    </i>Back to List
+                </a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

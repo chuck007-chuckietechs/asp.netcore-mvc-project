@@ -1,0 +1,3 @@
+﻿Add-Migration -Context NBDContext -OutputDir Data\NDMigrations Initial
+update-database -Context NBDContext
+update-database -Context ApplicationDbContext

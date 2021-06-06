@@ -1,0 +1,33 @@
+﻿@model NBDPrototype.ViewModels.StatisticVM
+
+@{
+    var prevDisabled = !Model.TopBidPerProject.HasPreviousPage ? "disabled='disabled'" : "";
+    var nextDisabled = !Model.TopBidPerProject.HasNextPage ? "disabled='disabled'" : "";
+}
+<ul class="pagination justify-content-center" style="margin:20px 0">
+    <li class="page-item">
+        <button type="submit" name="TopBidPerProjectpage" value="1" @prevDisabled class="btn page-link">
+            <span aria-hidden="true">&lArr;</span>&nbsp;First
+        </button>
+    </li>
+    <li class="page-item">
+        <button type="submit" name="TopBidPerProjectpage" @prevDisabled value="@(Model.TopBidPerProject.PageIndex - 1)" class="btn page-link">
+            <span aria-hidden="true">&larr;</span>&nbsp;Previous
+        </button>
+    </li>
+    <li class="page-item">
+        <button type="button" disabled="disabled" class="btn btn-primary">
+            Page @Model.TopBidPerProject.PageIndex of @Model.TopBidPerProject.TotalPages
+        </button>
+    </li>
+    <li class="page-item">
+        <button type="submit" name="TopBidPerProjectpage" @nextDisabled value="@(Model.TopBidPerProject.PageIndex + 1)" class="btn page-link">
+            Next&nbsp;<span aria-hidden="true">&rarr;</span>
+        </button>
+    </li>
+    <li class="page-item">
+        <button type="submit" name="TopBidPerProjectpage" @nextDisabled value="@(Model.TopBidPerProject.TotalPages)" class="btn page-link">
+            Last&nbsp;<span aria-hidden="true">&rArr;</span>
+        </button>
+    </li>
+</ul>

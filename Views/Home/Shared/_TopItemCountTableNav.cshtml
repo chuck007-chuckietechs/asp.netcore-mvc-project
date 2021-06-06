@@ -1,0 +1,31 @@
+﻿@{
+    var prevDisabled = !Model.ItemCount.HasPreviousPage ? "disabled='disabled'" : "";
+    var nextDisabled = !Model.ItemCount.HasNextPage ? "disabled='disabled'" : "";
+}
+<ul class="pagination justify-content-center" style="margin:20px 0">
+    <li class="page-item">
+        <button type="submit" name="ItemCountpage" value="1" @prevDisabled class="btn page-link">
+            <span aria-hidden="true">&lArr;</span>&nbsp;First
+        </button>
+    </li>
+    <li class="page-item">
+        <button type="submit" name="ItemCountpage" @prevDisabled value="@(Model.ItemCount.PageIndex - 1)" class="btn page-link">
+            <span aria-hidden="true">&larr;</span>&nbsp;Previous
+        </button>
+    </li>
+    <li class="page-item">
+        <button type="button" disabled="disabled" class="btn btn-primary">
+            Page @Model.ItemCount.PageIndex of @Model.ItemCount.TotalPages
+        </button>
+    </li>
+    <li class="page-item">
+        <button type="submit" name="ItemCountpage" @nextDisabled value="@(Model.ItemCount.PageIndex + 1)" class="btn page-link">
+            Next&nbsp;<span aria-hidden="true">&rarr;</span>
+        </button>
+    </li>
+    <li class="page-item">
+        <button type="submit" name="ItemCountpage" @nextDisabled value="@(Model.ItemCount.TotalPages)" class="btn page-link">
+            Last&nbsp;<span aria-hidden="true">&rArr;</span>
+        </button>
+    </li>
+</ul>

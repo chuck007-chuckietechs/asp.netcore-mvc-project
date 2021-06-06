@@ -1,0 +1,177 @@
+﻿@model IEnumerable<NBDPrototype.Models.BidItem>
+
+
+@{
+    ViewData["Title"] = "Index";
+    NBDPrototype.Models.Bid bid = (NBDPrototype.Models.Bid)ViewBag.Bid;
+}
+
+<p> </p>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => bid.Projects)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => bid.Projects.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => bid.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => bid.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => bid.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => bid.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => bid.ClosingDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => bid.ClosingDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => bid.Amount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => bid.Amount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => bid.Statuses)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => bid.Statuses.BidStatus)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => bid.IsApproved)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => bid.IsApproved)
+        </dd>
+    </dl>
+</div>
+
+<form asp-action="Index" method="get">
+    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+    <input type="hidden" name="BidId" value="@bid.ID" />
+    <a asp-action="Index" asp-controller="BidStaffs" asp-route-BidId="@bid.ID" class="btn btn-info btn-lg text-white " tooltip-test" title="View Staff Details"><i class="fas fa-info-circle">View Staff</i></a>
+    
+    
+    <h2>Bid Items</h2>
+    <dl class="dl-horizontal">
+        @*<dt>
+                <button class="btn @(ViewData["Filtering"])" type="button" data-toggle="collapse" id="filterToggle" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                    Filter
+                </button>
+            </dt>*@
+        @*<dd>
+                <div class="form-horizontal">
+                    <div class="collapse card card-body bg-light" style="padding-top: 10px; padding-bottom: 0px;" id="collapseFilter">
+                        <div class="form-row">
+                            <div class="form-group col-md-4 ml-md-3">
+                                <label class="control-label">Item Type:</label>
+                                @Html.DropDownList("ItemId", null, "All Reasons", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-3 align-self-end">
+                                <input type="submit" name="actionButton" value="Apply" class="btn btn-primary" />
+                                <a asp-action="Index" asp-route-BidId="@bid.ID">Clear</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </dd>*@
+        <dt>
+        </dt>
+        <dd>
+            <div>
+                <table class="table">
+                    <colgroup>
+                        <col span="1" />
+                        <col span="1" />
+                        <col span="1" />
+                        <col span="1" />
+                    </colgroup>
+                    <tr>
+                        <th>
+                            <input type="submit" name="actionButton" value="Item Code" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Item Type" class="btn btn-link" /><br />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Descriptions" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Size" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Price" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Quantity" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Total Sum" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <a asp-controller="BidItems" asp-action="Add" asp-route-BidId="@bid.ID">
+                                <span class="btn btn-success"><strong>&#x271A; Add</strong></span>
+                            </a>
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item.ItemType.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item.Size)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BidItemQuantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalItemCosts)
+                    </td>
+                    <td>
+                        <a asp-controller="BidItems" asp-action="Update" asp-route-id="@item.ID">
+                            <span class="btn btn-sm btn-outline-primary">&#x270D;</span>
+                        </a>
+                        <a asp-controller="BidItems" asp-action="Remove" asp-route-id="@item.ID">
+                            <span class="btn btn-sm btn-outline-danger">&#x274C</span>
+                        </a>
+                    </td>
+                </tr>
+                    }
+                </table>
+            </div>
+        </dd>
+    </dl>
+    <partial name="_PagingNavBar" />
+</form>
+<div>
+    <a asp-action="Edit" asp-controller="Bids" asp-route-id="@bid.ID">Edit</a> |
+    <a href='@ViewData["returnURL"]'>Back to Bid List</a>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+            $(function () {
+                $('[data-toggle="popover"]').popover();
+            });
+    </script>
+}

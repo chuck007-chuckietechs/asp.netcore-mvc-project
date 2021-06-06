@@ -1,0 +1,117 @@
+﻿
+@model IEnumerable<NBDPrototype.Models.Project>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container row p-0 m-0">
+    <div class="col-10 px-sm-0 m-0">
+        <h1 class="text-muted">Project List</h1>
+    </div>
+    @if (User.IsInRole("Manager") || User.IsInRole("Designer"))
+    {
+        <div class="col-2 px-sm-0 m-0">
+            <a asp-action="Create" class="btn btn-primary form-control text-white" data-toggle="tooltip" data-placement="top" tooltip-test" title="Create New Project">
+                <i class="fas fa-plus"></i>
+                Create New Project
+            </a>
+        </div>
+    }
+        @*<h1>Index</h1>
+
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>*@
+
+        <form asp-action="Index" method="get">
+            <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+            <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+            <div class="form-horizontal">
+                @*<br />*@
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" id="filterToggle" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                    Filter/Search
+                </button>
+                <div class="collapse @(ViewData["Filtering"])" id="collapseFilter">
+                    <div class="card card-body bg-light">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Select by Client:</label>
+                                @Html.DropDownList("ClientID", null, "All Clients", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Search Project Name:</label>
+                                @Html.TextBox("SearchString", null, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-4 align-self-end">
+                                <input type="submit" name="actionButton" value="Filter" class="btn btn-outline-primary" />
+                                <a asp-action="Index" class="btn btn-outline-dark">Clear</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="submit" name="actionButton" value="Project Name" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Project Site" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Client Name" class="btn btn-link" />
+                        </th>
+                        <th nowrap>
+                            <input type="submit" name="actionButton" value="Starting Date" class="btn btn-link" />
+                        </th>
+                        <th nowrap>
+                            <input type="submit" name="actionButton" value="Completion Date" class="btn btn-link" />
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Client.ClientName)
+                            </td>
+                            <td nowrap>
+                                @Html.DisplayFor(modelItem => item.DateStart)
+                            </td>
+                            <td nowrap>
+                                @Html.DisplayFor(modelItem => item.DateComplete)
+                            </td>
+                            <td>
+                                @if (User.IsInRole("Manager") || User.IsInRole("Designer"))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Edit a Project">Edit</a>
+                                    <button asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete a Project">Delete</button>
+                                    @*<a asp-route="bidscreate" asp-route-id="@item.ID" class="btn btn-primary btn-sm align-content-md-stretch" tooltip-test" title="Add Project Bid"><i class="fas fa-plus"></i>Add Bid</a>*@
+                                    <a href="/Bids/Create?id=${data}" class='btn btn-primary text-white btn-sm align-content-md-stretch' data-toggle="tooltip" data-placement="top" title="Add a Bid"style='cursor:pointer; width:93px;'>
+                                        <i class="fas fa-plus"></i>Add Bid
+                                    </a>
+                                }
+                                </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <partial name="_PagingNavBar" />
+        </form>
+    </div>
+
+

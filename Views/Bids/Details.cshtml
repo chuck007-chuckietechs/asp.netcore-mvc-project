@@ -1,0 +1,134 @@
+﻿@model NBDPrototype.Models.Bid
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Bid</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Projects.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClosingDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClosingDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Statuses)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Statuses.BidStatus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsApproved)
+        </dd>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>@if (User.IsInRole("Manager")){<a href="@Url.Action("Create","BidStaffs")" class="btn btn-primary btn-sm">Add Employee &raquo;</a>}</th>
+                    <th>Employee</th>
+                    <th>Houry Rate</th>
+                    <th>Est. Work Hours</th>
+                    <th>Markup Cost</th>
+                    <th>Cumulative Employee Cost</th>
+                </tr>
+                @foreach (var item in Model.BidStaffs)
+                {   
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Staff.StaffFullNameAndJob)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Staff.LabourCost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BidStaffTotalHours)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BidStaffMarkup)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.TotalStaffEarnings)
+                        </td>*@
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>@if (User.IsInRole("Manager")){<a href="@Url.Action("Create","BidItems")" class="btn btn-primary btn-sm">Add Item &raquo;</a>}</th>
+                    <th>Item Code</th>
+                    <th>Item Type</th>
+                    <th>Description</th>
+                    <th>Size</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th>Total Cost</th>
+                </tr>
+                @foreach (var item in Model.BidItems)
+                {
+                    <tr>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Item.ItemTypeMethod)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Item.Size)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BidItemQuantity)
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+

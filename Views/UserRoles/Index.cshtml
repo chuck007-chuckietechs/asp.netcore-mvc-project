@@ -1,0 +1,45 @@
+﻿@model IEnumerable<NBDPrototype.ViewModels.UserVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container row p-0 m-0">
+    <div class="col-10 px-sm-0 m-0">
+        <h1 class="text-muted">User Roles</h1>
+        <br />
+    </div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.userRoles)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @{
+                            foreach (var r in item.userRoles)
+                            {
+                                @:  @r <br />
+                            }
+                        }
+                    </td>
+                    <td >
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-sm text-white" })
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+

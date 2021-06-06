@@ -1,0 +1,105 @@
+﻿
+@using NBDPrototype.ViewModels;
+@model StatisticVM
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@*<div class="text-center">
+        <h1 class="display-4">Dashboard</h1>
+        <p>(work in progress).</p>
+    </div>*@
+
+<h1 class="display-4 text-success" style="align-content:center">Dashboard(work in progress)</h1>
+
+<hr />
+<div class="row">
+    <div class="container row">
+        <div class="col"></div>
+        <h3 class="col">Totals</h3>
+    </div>
+
+    @if (User.IsInRole("Manager"))
+    {
+        <div class="container row">
+            <div class="col"></div>
+            <h4 class="col">Clients: <span class="text-success">@Model.TotalClients</span></h4>
+            <h4 class="col">Projects: <span class="text-success">@Model.TotalAmountOfProjects</span></h4>
+            <h4 class="col">Bids: <span class="text-success">@Model.TotalAmountOfBids</span></h4>
+            <h4 class="col">Staffs: <span class="text-success">@Model.TotalStaffs</span></h4>
+
+            <div class="col"></div>
+        </div>
+    }
+
+    @if (User.IsInRole("Designer"))
+    {
+        <div class="container row">
+            <div class="col"></div>
+            <h4 class="col">Clients: <span class="text-success">@Model.TotalClients</span></h4>
+            <h4 class="col">Projects: <span class="text-success">@Model.TotalAmountOfProjects</span></h4>
+            <h4 class="col">Bids: <span class="text-success">@Model.TotalAmountOfBids</span></h4>
+
+            <div class="col"></div>
+        </div>
+    }
+
+
+
+    
+    <div class="container row"></div>
+    <hr />
+    <form asp-action="Index" method="get" class="container row">
+        <div class="row">
+            @if (User.IsInRole("Manager") || User.IsInRole("Designer") || User.IsInRole("Worker"))
+            {
+                <div class="col">
+                    <h3>Item Catalog</h3>
+                    <table class="table col-6">
+                        <thead>
+                            <tr>
+                                <th>Items Type</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ItemCount)
+                            {
+                                <tr>
+                                    <td>@item.Item1</td>
+                                    <td>@item.Item2.ToString("N0")</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <partial name="Shared/_TopItemCountTableNav.cshtml" />
+                </div>
+            }
+
+            <div class="col">
+                <h3>Highest Bids Per Project</h3>
+                <table class="table col-6">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Highest Bid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.TopBidPerProject)
+                        {
+                            <tr>
+                                <td align="left" nowrap width="70%">@item.Item1</td>
+                                <td align="left" nowrap width="30%">@item.Item2.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <partial name="Shared/_TopBidPerProjectTableNav.cshtml" />
+            </div>
+        </div>
+    </form>
+</div>

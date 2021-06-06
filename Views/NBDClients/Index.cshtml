@@ -1,0 +1,134 @@
+﻿@model IEnumerable<NBDPrototype.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container row p-0 m-0">
+    <div class="col-10 px-sm-0 m-0">
+        <h1 class="text-muted">Client List</h1>
+    </div>
+    @if (User.IsInRole("Manager") || User.IsInRole("Designer"))
+    {
+        <div class="col-2 px-sm-0 m-0">
+            <a asp-action="Create" class="btn btn-primary form-control text-white" data-toggle="tooltip" data-placement="top" title="Create New Client">
+                <i class="fas fa-plus"></i>
+                Create New Client
+            </a>
+        </div>
+    }
+        @*<h1>Index</h1>
+
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>*@
+
+
+        <form asp-action="Index" method="get">
+            <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+            <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+            <div class="form-horizontal">
+                @*<br />*@
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" id="filterToggle" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                    Filter/Search
+                </button>
+                <div class="collapse @(ViewData["Filtering"])" id="collapseFilter">
+                    <div class="card card-body bg-light">
+                        <div class="row">
+                            @*<div class="form-group col-md-4">
+                                    <label class="control-label">Select by Project:</label>
+                                    @Html.DropDownList("ID", null, "All Projects", htmlAttributes: new { @class = "form-control" })
+                                </div>*@
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Search Client Name:</label>
+                                @Html.TextBox("SearchString", null, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-4 align-self-end">
+                                <input type="submit" name="actionButton" value="Filter" class="btn btn-outline-primary" />
+                                <a asp-action="Index" class="btn btn-outline-dark">Clear</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            @*<table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClientName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClientAddress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContactName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContactPhone)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>*@
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="submit" name="actionButton" value="Client Name" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Client Address" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Contact Name" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Contact Phone" class="btn btn-link" />
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClientName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClientAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactPhone)
+                            </td>
+                            <td>
+                                @if (User.IsInRole("Manager") || User.IsInRole("Designer"))
+                                {
+                                    @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |*@
+                                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="top" title="Edit a Client">Edit</a>
+                                    @*<a asp-action="Details" asp-route-id="@item.ID">Details</a> |*@
+                                    @if (User.IsInRole("Manager"))
+                                     {
+                                        <button asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete a Client">Delete</button>
+                                     }
+                                        <a asp-controller="Projects" asp-action="Create" class='btn btn-primary text-white btn-sm align-content-md-stretch' data-toggle="tooltip" data-placement="top" title="Add a Project" style='cursor:pointer; width:93px;'>
+                                            <i class="fas fa-plus"></i>Project
+                                        </a>
+                                 }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <partial name="_PagingNavBar" />
+        </form>
+    </div>

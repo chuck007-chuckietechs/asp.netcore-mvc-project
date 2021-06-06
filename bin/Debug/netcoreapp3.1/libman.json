@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@4.6.0",
+      "destination": "wwwroot/lib/twitter-bootstrap/"
+    },
+    {
+      "library": "font-awesome@5.15.2",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "popper.js@2.9.1",
+      "destination": "wwwroot/lib/popper.js/"
+    },
+    {
+      "library": "jquery-toast-plugin@1.3.2",
+      "destination": "wwwroot/lib/jquery-toast-plugin/"
+    }
+  ,
+{
+  "library": "toastify-js@1.10.0",
+  "destination": "wwwroot/lib/toastify-js/"
+}
+,
+{
+  "library": "toast-css@1.1.0",
+  "destination": "wwwroot/lib/toast-css/"
+}
+,
+{
+  "library": "toastr.js@2.1.4",
+  "destination": "wwwroot/lib/toastr.js/"
+}
+]
+}

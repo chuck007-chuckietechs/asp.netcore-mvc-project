@@ -1,0 +1,111 @@
+﻿@page
+@model NBDPrototype.Pages.ClientList.IndexModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NBDPrototype</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+</head>
+<body>
+
+    @*<br />*@
+
+    <div class="container row p-0 m-0">
+        <div class="col-10 px-sm-0 m-0">
+            <h2 class="text-secondary">Client List</h2>
+        </div>
+        <div class="col-2 px-sm-0 m-0">
+            <a asp-page="Create" class="btn btn-primary form-control text-white">
+                <i class="fas fa-plus"></i>&nbsp;Create New Client
+            </a>
+        </div>
+
+        @*Start here*@
+
+        @*<div class="col-12 border p-3 mt-3">
+            <form method="post">
+                @if (Model.Client.Count() > 0)
+                {
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                @Html.DisplayNameFor(m => m.Client.FirstOrDefault().ClientName)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(m => m.Client.FirstOrDefault().ClientAddress)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(m => m.Client.FirstOrDefault().ContactName)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(m => m.Client.FirstOrDefault().ContactPhone)
+                            </th>
+
+                        </tr>
+
+                        @foreach (var item in Model.Client)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => item.ClientName)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(m => item.ClientAddress)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(m => item.ContactName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.ContactPhone)
+                                </td>
+
+                                <td>
+                                    <button asp-page-handler="Delete" asp-route-id="@item.ID" onclick="return confirm('Are you sure want to delete this client?')" class="btn btn-danger btn-sm">Delete</button>
+                                    <a asp-page="Edit" asp-route-id="@item.ID" class="btn btn-success btn-sm text-white">Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+            </form>
+        </div>
+
+
+        <div class="col-12" style="text-align:center">
+            <br />
+            <span class="h3 text-info">OR</span>
+            <br /><br />
+        </div>*@
+
+        @*End here*@
+
+        <div class="col-12 border p-3">
+            <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Client Address</th>
+                        <th>Contact Name</th>
+                        <th>Contact Phone</th>
+                        <th width="300px"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    @section Scripts{
+        <script src="~/js/clientList.js"></script>    
+    }
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿@page
+@model NBDPrototype.Pages.ClientList.EditModel
+
+<br />
+<h2 class="text-info">Edit Client</h2>
+<br />
+
+<div class="border container" style="padding:30px;">
+    <form method="post">
+        <input type="hidden" asp-for="Client.ID" />
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Client.ClientName"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Client.ClientName" class="form-control" />
+            </div>
+            <span asp-validation-for="Client.ClientName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Client.ClientAddress"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Client.ClientAddress" class="form-control" />
+            </div>
+            <span asp-validation-for="Client.ClientAddress" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Client.ContactName"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Client.ContactName" class="form-control" />
+            </div>
+            <span asp-validation-for="Client.ContactName" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Client.ContactPhone"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Client.ContactPhone" class="form-control" />
+            </div>
+            <span asp-validation-for="Client.ContactPhone" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <input type="submit" value="Update" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-3">
+                <a asp-page="Index" class="btn btn-success form-control">
+                    <i class="fas fa-sign-out-alt">
+                    </i>Back to List
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

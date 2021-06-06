@@ -1,0 +1,83 @@
+﻿@model NBDPrototype.Models.Project
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<h2 class="text-info">Create New Project</h2>
+<br />
+
+<div class="border container" style="padding:30px;">
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Name" class="form-control" placeholder="E.g. Nature Calls"/>
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Location"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Location" class="form-control" placeholder="E.g. London"/>
+            </div>
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClientID"></label>
+            </div>
+            <div class="col-6">
+                <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID">
+                    <option value="">Select a Client</option>
+                </select>
+            </div>
+            <span asp-validation-for="ClientID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="DateStart"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="DateStart" class="form-control" value="@(DateTime.Now.ToShortDateString())" />
+            </div>
+            <span asp-validation-for="DateStart" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="DateComplete"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="DateComplete" class="form-control" />
+            </div>
+            <span asp-validation-for="DateComplete" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <input type="submit" value="Create" class="btn btn-primary form-control" />
+            </div>
+            <div class="col-3">
+                <a asp-action="Index" class="btn btn-success form-control">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Back to List
+                </a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
